@@ -33,7 +33,6 @@ int partition(int arr[], int low, int high)
 	swap(&arr[i + 1], &arr[high]);
 	return (i + 1);
 }
-
 /* The main function that implements QuickSort
 arr[] --> Array to be sorted,
 low --> Starting index,
