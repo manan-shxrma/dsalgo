@@ -15,7 +15,33 @@ class Tree
     void inorder(Tree *root);
     void preorder(Tree* root);
     void postorder(Tree* root);
+    void leftView(Tree* root,int depth,int &maxDepth);
+    void rightView(Tree* root,int depth,int &maxDepth);
 };
+
+void Tree::leftView(Tree* root,int depth,int &maxDepth)
+{
+    if(!root)   return;
+    if(depth>maxDepth)
+    {
+        cout<<root->data<<" ";
+        maxDepth=depth;
+    }
+    leftView(root->left,depth+1,maxDepth);
+    leftView(root->right,depth+1,maxDepth);
+}
+
+void Tree::rightView(Tree* root,int depth,int &maxDepth)
+{
+    if(!root)   return;
+    if(depth>maxDepth)
+    {
+        cout<<root->data<<" ";
+        maxDepth=depth;
+    }
+    rightView(root->right,depth+1,maxDepth);
+    rightView(root->left,depth+1,maxDepth);
+}
 
 void Tree:: inorder(Tree* root)
 {
@@ -61,6 +87,12 @@ int main()
     root->preorder(root);
     cout<<endl<<"Postorder:\t";
     root->postorder(root);
+    cout<<"\nLeft View:\t";
+    int maxDepth=-1;
+    root->leftView(root,0,maxDepth);
+    cout<<"\nRight View:\t";
+    maxDepth=-1;
+    root->rightView(root,0,maxDepth);
 }
 
 
