@@ -1,14 +1,19 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<string.h>
 using namespace std;
-void reverse(string s){
-if(s.length()==0){
-return;
-}
-string ros=s.substr(1);
-reverse(ros);
-cout<<s[0];
-}
-int main(){
-reverse("xyz");
-return 0;
+int main ()
+{
+    char str[50], temp;
+    int i, j;
+    cout << "Enter a string : ";
+    gets(str);
+    j = strlen(str) - 1;
+    for (i = 0; i < j; i++,j--)
+    {
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+    }
+    cout << "\nReverse string : " << str;
+    return 0;
 }
