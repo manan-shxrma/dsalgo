@@ -16,11 +16,15 @@ public:
       {
           return dp[i];
       }
+      //option 1: consider single char
       int ans=solve(i+1,s,n,dp);
+      
+      //option 2:combine with next character, also check for its boundry value 26
        if(i<n-1 && (s[i]-'0')*10+(s[i+1]-'0')<=26)
        {
            ans+=solve(i+2,s,n,dp);
        }
+       //store it in dp array
         return dp[i]=ans;
     }
     int numDecodings(string s) {
