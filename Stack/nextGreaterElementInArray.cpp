@@ -1,3 +1,6 @@
+// In this problem, an integer array is given and for every array element, we have to print next greater element (on its right) in the array.
+// If an element doesn't have a greater element on its right, we'll print -1
+
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
