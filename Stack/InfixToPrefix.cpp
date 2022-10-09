@@ -1,3 +1,14 @@
+//Infix to Prefix problem using Stack
+
+//Input : (A - B/C) * (A/K-L)
+//Output : *-A/BC-/AKL
+
+//Input : X+Y*Z/W+U
+//Output : ++X/*YZWU
+
+//Time Complexity : O(n)
+//Space Complexity : O(n)
+
 #include<bits/stdc++.h>
 using namespace std;
 
