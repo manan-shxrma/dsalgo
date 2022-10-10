@@ -1,30 +1,28 @@
-// C++ code to linearly search x in arr[]. If x
-// is present then return its location, otherwise
-// return -1
-
-#include <iostream>
+#include<iostream>
+#include<cstdio>
+#include<cmath>
 using namespace std;
 
-int search(int arr[], int N, int x)
-{
-	int i;
-	for (i = 0; i < N; i++)
-		if (arr[i] == x)
-			return i;
-	return -1;
+int rec_linear_search(int arr[], int left, int right, int x) {
+    int result;
+    if (right < left)        // The array is exhausted so return -1
+        return -1;
+    if (arr[left] == x)        // If element found return position
+        return left;
+    // Call the function again with new subarray from next element.
+    result = rec_linear_search(arr, left+1, right, x);     
+    return result;    // return the result to the calling function.
 }
 
-// Driver's code
-int main(void)
-{
-	int arr[] = { 2, 3, 4, 10, 40 };
-	int x = 10;
-	int N = sizeof(arr) / sizeof(arr[0]);
+int main() {
+    int array[]={10,11,12,13,14,25,26,37,48,29};
+    int x=13;    // Searched Element.
+    int n = sizeof(array)/sizeof(array[0]);
+    int loc=rec_linear_search(array,0,n, x);    // Call the search function
 
-	// Function call
-	int result = search(arr, N, x);
-	(result == -1)
-		? cout << "Element is not present in array"
-		: cout << "Element is present at index " << result;
-	return 0;
+    if(loc != -1)
+        cout<<"Element found at location : "<<loc;
+    else
+        cout<<"Element not present in the array.";
+    return 0;
 }
