@@ -1,0 +1,117 @@
+#include<bits/stdc++.h>
+
+
+using namespace std;
+
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+} *root = NULL;
+
+void insert(int d, node *leaf)
+{
+
+    if(d< leaf->data)
+    {
+        if(leaf->left!=NULL)
+        {
+            insert(d, leaf->left);
+        }
+        else
+        {
+            leaf->left=new node;
+            leaf->left->data=d;
+            leaf->left->left=NULL;
+            leaf->left->right=NULL;
+        }
+    }
+    else if(d>=leaf->data)
+    {
+
+        if(leaf->right!=NULL)
+        {
+
+            insert(d, leaf->right);
+        }
+        else
+        {
+            leaf->right=new node;
+            leaf->right->data=d;
+            leaf->right->left=NULL;
+            leaf->right->right=NULL;
+        }
+    }
+}
+
+
+
+void createnode(int inf)
+{
+
+    if(root!=NULL)
+        insert(inf, root);
+    else
+    {
+        root=new node;
+        root->data=inf;
+        root->left=NULL;
+        root->right=NULL;
+    }
+}
+
+//Zig-Zag Traversal
+void zizagtraversal(struct node* zig)
+{
+    if (!zig)
+        return;
+    stack<struct node*> currentlevel;
+    stack<struct node*> nextlevel;
+    currentlevel.push(zig);
+    bool lefttoright = true;
+    while (!currentlevel.empty())
+    {
+
+        struct node* temp = currentlevel.top();
+        currentlevel.pop();
+        if (temp)
+        {
+            cout << temp->data <<" ";
+            if (lefttoright)
+            {
+
+                if (temp->left)
+                    nextlevel.push(temp->left);
+                if (temp->right)
+                    nextlevel.push(temp->right);
+            }
+        
+            else
+            {
+                if (temp->right)
+                    nextlevel.push(temp->right);
+                if (temp->left)
+                    nextlevel.push(temp->left);
+            }
+        }
+        if (currentlevel.empty())
+        {
+            lefttoright = !lefttoright;
+            swap(currentlevel, nextlevel);
+        }
+    }
+}
+
+int main()
+{   
+    createnode(6);
+    createnode(4);
+    createnode(8);
+    createnode(1);
+    createnode(5);
+    cout<<"Zig-Zag Order Traversal: ";
+    zizagtraversal(root);
+    cout<<endl;
+    return 0;
+}

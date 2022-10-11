@@ -1,0 +1,57 @@
+struct ListNode {
+     int val;
+      ListNode *next;
+      ListNode() : val(0), next(nullptr) {}
+      ListNode(int x) : val(x), next(nullptr) {}
+      ListNode(int x, ListNode *next) : val(x), next(next) {}
+  };
+  class Solution {
+public:
+    ListNode* swapNodes(ListNode* head, int k) {
+       int count = 0;
+        int i=1;
+        ListNode*temp=head;
+        ListNode *ptr=head;
+        ListNode *fast=head;
+        while(temp!=NULL)
+        {
+            count=count +1;
+            temp=temp->next;
+
+        }
+        if(count==2){
+            swap(ptr->val, ptr->next->val);
+            return head;
+                 }
+         if(count/2>=k){
+        while(i!=(count+1)-k)
+        {
+            if(i!=k && i<k)
+            {
+            ptr=ptr->next;
+            }
+            
+                fast=fast->next;
+            i++;
+        }
+         }
+        else
+        {
+             while(i!=k)
+          {
+            if(i!=(count+1)-k && i<(count+1)-k)
+            
+            {
+            ptr=ptr->next;
+            }
+            
+                fast=fast->next;
+        
+            i++;
+         }
+            
+        }
+        swap(ptr->val, fast->val);
+        return head;
+        }
+};
