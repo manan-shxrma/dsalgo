@@ -1,0 +1,26 @@
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
+
+void pascal(int n)
+{      
+    for (int i = 1; i <= n; i++)
+    {
+        int L = 1;
+        cout<<setw(n-i+1);
+        for (int j = 1; j <= i; j++) 
+        { 
+            cout<<L<<" "; 
+            L = L * (i - j) / j; 
+        }
+        cout<<"\n";
+    }
+}
+
+int main()
+{
+    int n=6;
+    pascal(n);
+    return 0;
+}

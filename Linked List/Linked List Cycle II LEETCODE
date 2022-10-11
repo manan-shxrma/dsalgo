@@ -1,0 +1,24 @@
+struct ListNode {
+      int val;
+      ListNode *next;
+      ListNode(int x) : val(x), next(NULL) {}
+ };
+ class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        unordered_set<ListNode*>mp;
+        ListNode*temp=head;
+        while(temp!=NULL){
+            if(mp.find(temp)==mp.end()){
+               mp.insert(temp);
+                temp=temp->next;
+            }
+            else{
+                return temp;
+                
+            }
+        }
+    
+        return NULL;
+    }
+};
