@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+bool knows(vector<vector<int>>&M,int a ,int b){
+    if(M[a][b]==1){
+            return true;
+        }
+        return false;
+}
+
+int findCeleb(vector<vector<int> >& M,int n){
+     stack<int >s;
+        for(int i=0;i<n;i++){
+            s.push(i);
+        }
+        
+        while(s.size()>1){
+            int a=s.top();
+            s.pop();
+            int b=s.top();
+            s.pop(); 
+            
+            if(knows(M,a,b)){
+                s.push(b);
+            }
+            else{
+                s.push(a);
+            }
+        }
+        int cand=s.top();
+        int cnt=0;
+        bool rowCheck=false;
+        for(int i=0;i<n;i++){
+          if(M[cand][i]==0){
+              cnt++;
+          }
+              
+          }  
+          if(cnt==n)rowCheck=true;
+          
+          int cntt=0;
+          bool colCheck=false;
+          for(int i=0;i<n;i++){
+              if(M[i][cand]==1){
+                  cntt++;
+            }
+          }
+          if(cntt==n-1)
+            colCheck=true;
+          
+        if(rowCheck && colCheck)
+            return cand;
+        return -1;
+}
+
+int main(){
+    int n;
+    cin>>n;
+    vector<vector<int>> M(n,vector<int>(n,0));
+
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cin>>M[i][j];
+        }
+    }
+
+    cout<<findCeleb(M,n);
+    return 0;
+}
