@@ -1,0 +1,52 @@
+struct ListNode {
+     int val;
+      ListNode *next;
+     ListNode() : val(0), next(nullptr) {}
+     ListNode(int x) : val(x), next(nullptr) {}
+     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ };
+ class Solution {
+public:
+    int pairSum(ListNode* head) {
+     // first we'll reverse the other half  of linked list and then compare 1st element with the 1st half of other list and 2nd with 2nd and so on.
+        ListNode* slow=head;
+        ListNode* fast=head;
+        ListNode* ptr1=NULL;
+       
+       
+        int count = 0;
+        while(fast!=NULL && fast->next!=NULL )// to find middle element of linked list
+          {
+             fast=fast->next->next ;
+             slow=slow->next ;
+             count++ ; 
+        }
+              ListNode* ptr2=slow;
+              ListNode* ptr3=slow;
+              
+          while(slow!=NULL && ptr3!=NULL) //to reverse the 2nd linked list
+          {
+              ptr3=ptr2->next;
+              ptr2->next=ptr1;
+              ptr1=ptr2;
+              ptr2=ptr3;
+          }
+        ListNode* start=head;
+        cout<<start->val<<endl;
+        cout<<ptr1->val<<endl;
+            int temp=0;
+           while(start!=NULL && ptr1!=NULL)
+           { 
+             int sum = start->val + ptr1->val;
+               start=start->next;
+               ptr1=ptr1->next;
+               if(sum >temp)
+               {
+                  temp = sum ;
+                   cout<<temp<<endl;
+               }
+               
+           }
+        return temp;
+    }
+};

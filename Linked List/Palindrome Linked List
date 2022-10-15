@@ -1,0 +1,50 @@
+ struct ListNode {
+      int val;
+      ListNode *next;
+      ListNode() : val(0), next(nullptr) {}
+      ListNode(int x) : val(x), next(nullptr) {}
+      ListNode(int x, ListNode *next) : val(x), next(next) {}
+  };
+  class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+     
+        ListNode* slow=head;
+        ListNode* fast=head;
+        ListNode* ptr1=NULL;
+       
+       
+        int count = 0;
+        while(fast!=NULL && fast->next!=NULL )// to find middle element of linked list
+          {
+             fast=fast->next->next ;
+             slow=slow->next ;
+             count++ ; 
+        }
+              ListNode* ptr2=slow;
+              ListNode* ptr3=slow;
+              
+          while(slow!=NULL && ptr3!=NULL) //to reverse the 2nd linked list
+          {
+              ptr3=ptr2->next;
+              ptr2->next=ptr1;
+              ptr1=ptr2;
+              ptr2=ptr3;
+          }
+         
+            while(head!=NULL && ptr1!=NULL)// for compairing elements of lists
+            {
+                
+            if(head->val!=ptr1->val)
+            {
+                return false;
+            }
+                head = head->next;
+                ptr1 = ptr1->next; 
+                // cout<<head->val<<endl;
+                // cout<<ptr1->val<<endl;
+            }
+        
+        return true ;
+    }
+};
